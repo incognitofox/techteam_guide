@@ -18,6 +18,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Customizing the Site" href="react-1.html" />
     <link rel="prev" title="Web Scraping" href="../scraping/scraping-1.html" /> 
 </head>
 
@@ -46,10 +47,9 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installing-npm">Installing <code class="code docutils literal notranslate"><span class="pre">npm</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#creating-a-new-project">Creating a New Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#adding-a-new-page">Adding a new page</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#creating-the-page">Creating the page</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="react-1.html">Customizing the Site</a></li>
 </ul>
 
         </div>
@@ -80,7 +80,7 @@
 <h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline"></a></h1>
 <section id="installing-npm">
 <h2>Installing <code class="code docutils literal notranslate"><span class="pre">npm</span></code><a class="headerlink" href="#installing-npm" title="Permalink to this headline"></a></h2>
-<p>First, to locally host the server, you need to have <cite>npm</cite> installed. You can do this by first installing the <cite>nvm</cite> package manager with the following command</p>
+<p>First, to locally host the server, you need to have <cite>npm</cite> installed. You can do this by first installing the <cite>nvm</cite> package manager with the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash</span>
 </pre></div>
 </div>
@@ -107,31 +107,14 @@
 <span class="go">└── src</span>
 </pre></div>
 </div>
-<p>To host the server:
-1. <code class="code docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span></code> to install all depedencies (these are listed in <code class="code docutils literal notranslate"><span class="pre">package.json</span></code>)
-2. <code class="code docutils literal notranslate"><span class="pre">npm</span> <span class="pre">start</span></code></p>
+<p>The <code class="code docutils literal notranslate"><span class="pre">public</span></code> folder contains any data you want to include on your site (think images, data files, etc). The <code class="code docutils literal notranslate"><span class="pre">src</span></code> folder contains all the scripts we will use to generate our page.</p>
+<p>Within the <code class="code docutils literal notranslate"><span class="pre">src</span></code> folder, there is a file <code class="code docutils literal notranslate"><span class="pre">App.js</span></code>. This our “main” page, or the script that is run with the command <code class="code docutils literal notranslate"><span class="pre">npm</span> <span class="pre">start</span></code>.</p>
+<p>To host the server:</p>
+<ol class="arabic simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span></code> to install all depedencies (these are listed in <code class="code docutils literal notranslate"><span class="pre">package.json</span></code>)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">npm</span> <span class="pre">start</span></code></p></li>
+</ol>
 <p>For more information, see <a class="reference external" href="https://reactjs.org/docs/create-a-new-react-app.html">Creating a New React App</a>.</p>
-</section>
-<section id="adding-a-new-page">
-<h2>Adding a new page<a class="headerlink" href="#adding-a-new-page" title="Permalink to this headline"></a></h2>
-<p>To add a new page, follow the below steps:
-1. Add a path to <code class="code docutils literal notranslate"><span class="pre">src/App.js</span></code>. To do this, add the line <code class="code docutils literal notranslate"><span class="pre">&lt;Route</span> <span class="pre">path=&quot;/[endpoint]&quot;</span> <span class="pre">element={&lt;[your</span> <span class="pre">page]</span> <span class="pre">/&gt;}</span> <span class="pre">/&gt;</span></code>.
-2. At the top of <code class="code docutils literal notranslate"><span class="pre">src/App.js</span></code>, add the line <code class="code docutils literal notranslate"><span class="pre">import</span> <span class="pre">[your</span> <span class="pre">page]</span> <span class="pre">from</span> <span class="pre">&quot;./pages/[your</span> <span class="pre">page].js&quot;</span></code>
-3. Create a file in <code class="code docutils literal notranslate"><span class="pre">src/pages</span></code> called <code class="code docutils literal notranslate"><span class="pre">[your</span> <span class="pre">page].js</span></code>.</p>
-<p>When in doubt, look at the other routes in <code class="code docutils literal notranslate"><span class="pre">src/App.js</span></code> as an example.</p>
-</section>
-<section id="creating-the-page">
-<h2>Creating the page<a class="headerlink" href="#creating-the-page" title="Permalink to this headline"></a></h2>
-<p>Suppose we are creating a page called “Page”, your <cite>src/pages/Page.js</cite> file should a bit like this</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">Page</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="p">(</span>
-    <span class="c1">//some html</span>
-  <span class="p">);</span>
-<span class="p">}</span>
-<span class="k">export</span> <span class="k">default</span> <span class="nx">Page</span>
-</pre></div>
-</div>
-<p>When in doubt, look at <code class="code docutils literal notranslate"><span class="pre">src/pages/Layout.js</span></code> as an example.</p>
 </section>
 </section>
 
@@ -140,6 +123,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../scraping/scraping-1.html" class="btn btn-neutral float-left" title="Web Scraping" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="react-1.html" class="btn btn-neutral float-right" title="Customizing the Site" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

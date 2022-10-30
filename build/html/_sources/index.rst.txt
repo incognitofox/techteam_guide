@@ -19,3 +19,4 @@ Welcome!
     :caption: React
 
     react/react-0
+    react/react-1

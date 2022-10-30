@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adding Pages &mdash; TechTeam Guide  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Getting started" href="react-0.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> TechTeam Guide
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Web Scraping</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scraping/scraping-0.html">A Short Primer on Webpages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scraping/scraping-1.html">Web Scraping</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">React</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="react-0.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Adding Pages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-endpoints">Creating Endpoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#first-page">First Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-a-new-page">Adding a New Page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-the-page">Creating the Page</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TechTeam Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Adding Pages</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/react/react-1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adding-pages">
+<h1>Adding Pages<a class="headerlink" href="#adding-pages" title="Permalink to this headline"></a></h1>
+<section id="creating-endpoints">
+<h2>Creating Endpoints<a class="headerlink" href="#creating-endpoints" title="Permalink to this headline"></a></h2>
+<p>Open up <code class="code docutils literal notranslate"><span class="pre">src/App.js</span></code>, delete everything that’s there, and copy in the below code:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>import logo from &#39;./logo.svg&#39;;
+import &#39;./App.css&#39;;
+import { BrowserRouter, Routes, Route } from &quot;react-router-dom&quot;;
+import LandingPage from &quot;./pages/LandingPage&quot;;
+
+function App() {
+  return (
+        &lt;BrowserRouter&gt;
+          &lt;Routes&gt;
+                &lt;Route exact path=&quot;/&quot; element={&lt;LandingPage /&gt;}&gt;
+                &lt;/Route&gt;
+          &lt;/Routes&gt;
+        &lt;/BrowserRouter&gt;
+  );
+}
+</pre></div>
+</div>
+<p>Essentially what this bit of code is doing is it is defining our base endpoint, and telling the program that the source file for our landing page is <code class="code docutils literal notranslate"><span class="pre">LandingPage</span></code> (which we are importing from <code class="code docutils literal notranslate"><span class="pre">./pages/LandingPage</span></code>. So, if our host is “localhost:3000”, we have defined our base path as “localhost:3000/”. If we want to define a new endpoint, we would add a route under the base route and specify the endpoint and the source file.</p>
+</section>
+<section id="first-page">
+<h2>First Page<a class="headerlink" href="#first-page" title="Permalink to this headline"></a></h2>
+<p>Now that we’ve set up our base route, we need to write some code to display something at that route. For organization purposes, we will put all our code for pages that aren’t <code class="code docutils literal notranslate"><span class="pre">App.js</span></code> in a seperate folder, <code class="code docutils literal notranslate"><span class="pre">pages</span></code> with the <code class="code docutils literal notranslate"><span class="pre">src</span></code> folder. Now make the file <code class="code docutils literal notranslate"><span class="pre">LandingPage.js</span></code> in the <code class="code docutils literal notranslate"><span class="pre">pages</span></code> folder.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>const LandingPage () =&gt; {
+  return (
+      &lt;div&gt;What hath God wrought?&lt;/div&gt;
+  );
+}
+export default LandingPage
+</pre></div>
+</div>
+</section>
+<section id="adding-a-new-page">
+<h2>Adding a New Page<a class="headerlink" href="#adding-a-new-page" title="Permalink to this headline"></a></h2>
+<p>To add a new page, follow the below steps:</p>
+<ol class="arabic">
+<li><p>Add a path to <code class="code docutils literal notranslate"><span class="pre">src/App.js</span></code>. To do this, add the line</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>&lt;Route path=&quot;/[endpoint]&quot; element={&lt;[your page] /&gt;} /&gt;
+</pre></div>
+</div>
+<p>between the <code class="code docutils literal notranslate"><span class="pre">&lt;Route</span> <span class="pre">exact</span> <span class="pre">...&gt;</span></code> and <code class="code docutils literal notranslate"><span class="pre">&lt;/Route&gt;</span></code> lines.</p>
+</li>
+<li><p>At the top of <code class="code docutils literal notranslate"><span class="pre">src/App.js</span></code>, add the line</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>import [your page] from &quot;./pages/[your page].js&quot;`
+</pre></div>
+</div>
+</li>
+<li><p>Create a file in <code class="code docutils literal notranslate"><span class="pre">src/pages</span></code> called <code class="code docutils literal notranslate"><span class="pre">[your</span> <span class="pre">page].js</span></code>.</p></li>
+</ol>
+<p>Upon restarting the server, this new page will be located at <code class="code docutils literal notranslate"><span class="pre">[hostname]/[endpoint]</span></code> (eg localhost:3000/test).</p>
+</section>
+<section id="creating-the-page">
+<h2>Creating the Page<a class="headerlink" href="#creating-the-page" title="Permalink to this headline"></a></h2>
+<p>Suppose we are creating a page called “Page”, your <code class="code docutils literal notranslate"><span class="pre">src/pages/Page.js</span></code> file should a bit like this</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">Page</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="c1">//some html</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Page</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="react-0.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, William Wang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
