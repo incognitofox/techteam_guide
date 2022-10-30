@@ -9,7 +9,6 @@ Welcome!
 
 .. toctree::
     :maxdepth: 2
-    :hidden:
     :caption: Web Scraping
 
     scraping/scraping-0
@@ -17,7 +16,6 @@ Welcome!
 
 .. toctree::
     :maxdepth: 2
-    :hidden:
     :caption: React
 
     react/react-0
