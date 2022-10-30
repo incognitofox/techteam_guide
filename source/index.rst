@@ -9,8 +9,15 @@ Welcome!
 
 .. toctree::
     :maxdepth: 2
+    :hidden:
+    :caption: Web Scraping
 
-    intro
-    scraping
+    scraping/scraping-0
+    scraping/scraping-1
 
+.. toctree::
+    :maxdepth: 2
+    :hidden:
+    :caption: React
 
+    react/react-0

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Scraping &mdash; TechTeam Guide  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="A Short Primer on Webpages" href="scraping-0.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> TechTeam Guide
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Web Scraping</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="scraping-0.html">A Short Primer on Webpages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Web Scraping</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-idea">Basic Idea</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#retrieving-html-code">Retrieving HTML Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scraping-html">Scraping HTML</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">TechTeam Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Web Scraping</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/scraping/scraping-1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="web-scraping">
+<h1>Web Scraping<a class="headerlink" href="#web-scraping" title="Permalink to this headline"></a></h1>
+<section id="basic-idea">
+<h2>Basic Idea<a class="headerlink" href="#basic-idea" title="Permalink to this headline"></a></h2>
+<p>We can easily retrieve the HTML associated with a specific page by pretending we are trying visit the page (sending a “request” for information). The page responds to the request by sending us what to display (eg the HTML). Once we have the HTML in text form, we can parse out information from tags.</p>
+<p>For example, suppose we wanted to extract the Nobel laureates from the Wikipedia page for Nobel laureates. In HTML, tables are denoted with the <cite>&lt;table&gt;</cite> tag and table rows with <cite>&lt;tr&gt;</cite>. We could now conceivably look through the text and greedily find <cite>&lt;tr&gt;</cite> tags then capture everything until we get to the next <cite>&lt;/tr&gt;</cite> tag (closing the element).</p>
+<p>In this manner, we can extract the information from the HTML. Luckily, the Python package BeautifulSoup does this for us, so we don’t need to deal with regular expressions or other methods of parsing strings.</p>
+</section>
+<section id="retrieving-html-code">
+<h2>Retrieving HTML Code<a class="headerlink" href="#retrieving-html-code" title="Permalink to this headline"></a></h2>
+<p>To make a long story short, when you view something on the internet, your device makes a request to some location on the internet to receive back an HTML file to then display. We can do this using the Python <code class="docutils literal notranslate"><span class="pre">requests</span></code> library.</p>
+<p>For example, this bit of code retrieves the HTML for the Wikipedia page for the University of Chicago. You can try it out yourself, print out the text, save it to a “.html” file, then open it up in your browser.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://en.wikipedia.org/wiki/University_of_Chicago&quot;</span><span class="p">)</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+</section>
+<section id="scraping-html">
+<h2>Scraping HTML<a class="headerlink" href="#scraping-html" title="Permalink to this headline"></a></h2>
+<p>Now that we have the HTML, we can look for elements in the code, and extract any data we need.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="c1"># retrieve html of page</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://en.wikipedia.org/wiki/List_of_Nobel_laureates&quot;</span><span class="p">)</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span>
+
+<span class="c1"># scrape out table elements</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span> <span class="c1"># specifies what kind of code we are looking at</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">)</span> <span class="c1"># finds the first &lt;table&gt; element</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">)</span> <span class="c1"># within the first table element, find all the row elements</span>
+<span class="n">rows_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Extract row data</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+    <span class="n">row_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">cells</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;td&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cells</span><span class="p">:</span>
+        <span class="n">row_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cell</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
+    <span class="n">rows_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more information and practice, see <a class="reference external" href="https://classes.cs.uchicago.edu/archive/2022/winter/12200-1/labs/lab1/index.html">this Lab</a> from an old CS department offering.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scraping-0.html" class="btn btn-neutral float-left" title="A Short Primer on Webpages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, William Wang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

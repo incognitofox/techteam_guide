@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Web Scraping'
+project = 'TechTeam Guide'
 copyright = '2022, William Wang'
 author = 'William Wang'
 
